@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PolicyService.Api.Events;
+using Steeltoe.Discovery.Client;
 
 namespace ChatService;
 
@@ -87,6 +88,7 @@ public class Startup
         services.AddRabbitListeners();
         
         services.AddSwaggerGen();
+        services.AddDiscoveryClient(Configuration);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,7 +106,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
+        app.UseDiscoveryClient();
         app.UseCors("CorsPolicy");
         app.UseAuthentication();
         app.UseAuthorization();
