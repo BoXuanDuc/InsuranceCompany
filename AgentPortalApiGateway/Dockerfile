@@ -4,10 +4,10 @@ ENV APP_HOME /opt/app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-COPY AgentPortalApiGateway/*.csproj $APP_HOME/
-RUN cd $APP_HOME && dotnet restore
+COPY AgentPortalApiGateway/AgentPortalApiGateway/*.csproj $APP_HOME/
+RUN cd $APP_HOME && dotnet restore AgentPortalApiGateway.csproj
 
-COPY AgentPortalApiGateway/ $APP_HOME/
+COPY AgentPortalApiGateway/AgentPortalApiGateway/ $APP_HOME/
 RUN cd $APP_HOME && dotnet build
 
 FROM build AS publish
